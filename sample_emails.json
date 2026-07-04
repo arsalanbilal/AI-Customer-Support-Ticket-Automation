@@ -1,0 +1,72 @@
+[
+  {
+    "sender_name": "Rahul Mehta",
+    "sender_email": "rahul@example.com",
+    "subject": "Unable to login to my account",
+    "body": "Hi team, I cannot log in to my dashboard since this morning. It keeps saying invalid OTP and I need access urgently to run payroll today. Please help ASAP.",
+    "attachments": []
+  },
+  {
+    "sender_name": "Priya Sharma",
+    "sender_email": "priya@example.com",
+    "subject": "Refund for duplicate charge",
+    "body": "I was charged twice for invoice INV-2081, once on the 1st and once on the 2nd. Please process a refund for the duplicate charge as soon as possible.",
+    "attachments": ["invoice.png"]
+  },
+  {
+    "sender_name": "Nikhil Rao",
+    "sender_email": "nikhil@example.com",
+    "subject": "Feature request for reports export",
+    "body": "It would be great if we could export monthly reports to CSV from the analytics page. Right now we have to copy-paste everything manually, which is painful.",
+    "attachments": []
+  },
+  {
+    "sender_name": "Sara Ahmed",
+    "sender_email": "sara.ahmed@acmecorp.com",
+    "subject": "Production is down for our entire team",
+    "body": "Our production environment has been down for the last 20 minutes and none of our 200 users can access the platform. This is a critical outage impacting our business. Please escalate immediately.",
+    "attachments": []
+  },
+  {
+    "sender_name": "Tom Becker",
+    "sender_email": "tom.becker@example.com",
+    "subject": "Bug: export button crashes the app",
+    "body": "Every time I click 'Export to PDF' on the invoices page, the app freezes and I have to refresh. This has been happening consistently since yesterday's update.",
+    "attachments": ["screenshot.png"]
+  },
+  {
+    "sender_name": "Elena Petrova",
+    "sender_email": "elena.petrova@example.com",
+    "subject": "Question about upgrading my plan",
+    "body": "Hi, we're currently on the Starter plan and considering upgrading to Business. Could you tell me the pricing difference and whether we'd keep our existing integrations?",
+    "attachments": []
+  },
+  {
+    "sender_name": "Marcus Lee",
+    "sender_email": "marcus.lee@example.com",
+    "subject": "How do I reset my two-factor authentication?",
+    "body": "I lost access to my old phone and can't get the 2FA codes anymore. How can I reset this so I can get back into my account? Not urgent, just need it sorted this week.",
+    "attachments": []
+  },
+  {
+    "sender_name": "Grace Kim",
+    "sender_email": "grace.kim@example.com",
+    "subject": "Really happy with the new dashboard update!",
+    "body": "Just wanted to say the new dashboard redesign is fantastic, especially the new filters. One small question though - is there a way to save a filter as a default view?",
+    "attachments": []
+  },
+  {
+    "sender_name": "Rahul Mehta",
+    "sender_email": "rahul@example.com",
+    "subject": "Still can't log in - following up",
+    "body": "Following up on my earlier email, I'm still unable to log in and it's still saying invalid OTP. This is urgent, please advise.",
+    "attachments": []
+  },
+  {
+    "sender_name": "Fatima Noor",
+    "sender_email": "fatima.noor@example.com",
+    "subject": "General question about data retention policy",
+    "body": "Could someone point me to documentation on how long customer data is retained after account cancellation? We need this for a compliance review.",
+    "attachments": []
+  }
+]

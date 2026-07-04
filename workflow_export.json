@@ -1,0 +1,63 @@
+{
+  "workflow_name": "AI Customer Support Ticket Automation",
+  "engine": "LangGraph (Python) - see ticket_workflow.py:build_graph()",
+  "description": "Exported representation of the ticket automation pipeline graph. This is the 'equivalent' export requested in the assignment since the implementation is a Python/LangGraph application rather than an n8n workflow.",
+  "entry_point": "analyze",
+  "nodes": [
+    {
+      "id": "analyze",
+      "type": "ai",
+      "description": "Sends the raw email (subject, body, sender, timestamp) to the LLM using SYSTEM_PROMPT + ANALYSIS_PROMPT_TEMPLATE from prompts.py. Retries up to LLM_MAX_RETRIES times with exponential backoff on failure. Produces a structured analysis dict (or an empty dict + logged error on failure)."
+    },
+    {
+      "id": "validate",
+      "type": "transform",
+      "description": "Normalizes AI output: maps category/priority/sentiment to allowed enums, deduplicates tags, validates the sender email, blends AI priority with deterministic business rules (priority_from_rules), and assembles the full ticket record."
+    },
+    {
+      "id": "check_duplicate",
+      "type": "logic",
+      "description": "Searches recent open tickets from the same sender/category for a highly similar issue_summary (fuzzy match, rapidfuzz). If found, sets ticket.duplicate_of to the earlier ticket_id."
+    },
+    {
+      "id": "persist",
+      "type": "storage",
+      "description": "Inserts the ticket into the local SQLite 'tickets' table and writes a 'create' entry to 'audit_log'."
+    },
+    {
+      "id": "sync_external",
+      "type": "integration",
+      "description": "If Airtable credentials are configured, creates a mirrored record in the configured Airtable base/table and stores the returned record id back on the local ticket row."
+    },
+    {
+      "id": "ack",
+      "type": "notification",
+      "description": "Builds the acknowledgement email (ticket id, summary, status, assigned team) and sends it via SMTP if AUTO_SEND_ACK is enabled and SMTP is configured."
+    }
+  ],
+  "edges": [
+    {"from": "analyze", "to": "validate"},
+    {"from": "validate", "to": "check_duplicate"},
+    {"from": "check_duplicate", "to": "persist"},
+    {"from": "persist", "to": "sync_external"},
+    {"from": "sync_external", "to": "ack"},
+    {"from": "ack", "to": "END"}
+  ],
+  "external_triggers": [
+    {
+      "name": "IMAP inbox poll",
+      "file": "email_reader.py",
+      "description": "fetch_unseen_emails() connects to the configured IMAP mailbox, pulls unseen messages, extracts metadata + attachments, and feeds each one into the graph above as raw_email input."
+    },
+    {
+      "name": "Manual entry (Streamlit UI)",
+      "file": "app.py",
+      "description": "Agent fills in a form (sender, subject, body, attachments) which is fed into the graph the same way an inbound email would be."
+    },
+    {
+      "name": "Sample data loader (Streamlit UI)",
+      "file": "app.py + sample_emails.json",
+      "description": "Loads bundled sample emails through the same graph, for demos/testing without a live mailbox."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+
+services:
+  ticket-support:
+    build: .
+    container_name: ticket_ai_support
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    volumes:
+      - .:/app
+    restart: unless-stopped

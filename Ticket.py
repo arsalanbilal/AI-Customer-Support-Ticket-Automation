@@ -21,14 +21,19 @@ logger = get_logger("app")
 st.set_page_config(page_title="AI Support Ticket Automation", layout="wide")
 st.title("AI Customer Support Ticket Automation")
 
-user_api_key = st.sidebar.text_input("Enter yourGemini API Key", type = "password", help = "Get a key from Google AI Studio")
+user_api_key = st.sidebar.text_input(
+    "Enter your Gemini API Key",
+    type="password",
+    help="Get a key from Google AI Studio"
+)
+
 if user_api_key:
     llm = ChatGoogleGenerativeAI(
-    model= gemini-2.5-flash,
-    api_key= user_api_key,
-    temperature=0,
-)
-graph = build_graph(llm)
+        model="gemini-2.5-flash",
+        api_key=user_api_key,
+        temperature=0,
+    )
+    graph = build_graph(llm)
 
 
 def process_email_dict(email_dict: dict):

@@ -24,7 +24,7 @@ st.title("AI Customer Support Ticket Automation")
 user_api_key = st.sidebar.text_input("Enter yourGemini API Key", type = "password", help = "Get a key from Google AI Studio")
 if user_api_key:
     llm = ChatGoogleGenerativeAI(
-    model=settings.gemini_model,
+    model= gemini-2.5-flash,
     api_key= user_api_key,
     temperature=0,
 )

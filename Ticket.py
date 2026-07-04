@@ -21,15 +21,11 @@ logger = get_logger("app")
 st.set_page_config(page_title="AI Support Ticket Automation", layout="wide")
 st.title("AI Customer Support Ticket Automation")
 
-if not settings.gemini_api_key:
-    st.warning(
-        "GEMINI_API_KEY is not set. Set it in your .env file before processing real emails. "
-        "You can still explore the UI, but AI analysis will fail and fall back to defaults."
-    )
-
-llm = ChatGoogleGenerativeAI(
+user_api_key = st.sidebar.text_input("Enter yourGemini API Key", type = "password", help = "Get a key from Google AI Studio")
+if user_api_key:
+    llm = ChatGoogleGenerativeAI(
     model=settings.gemini_model,
-    api_key=settings.gemini_api_key,
+    api_key= user_api_key,
     temperature=0,
 )
 graph = build_graph(llm)
